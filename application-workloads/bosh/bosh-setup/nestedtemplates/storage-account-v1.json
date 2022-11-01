@@ -28,7 +28,7 @@
     },
     "storageAccountKey": {
       "type": "string",
-      "value": "[listKeys(variables('storageAccountId'), '2021-08-01').keys[0].value]"
+      "value": "[listKeys(variables('storageAccountName'), '2021-08-01').keys[0].value]"
     },
     "blobEndpoint": {
       "type": "string",
