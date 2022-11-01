@@ -695,7 +695,7 @@
               "SUBSCRIPTION_ID": "[subscription().subscriptionId]",
               "RESOURCE_GROUP_NAME": "[resourceGroup().name]",
               "DEFAULT_STORAGE_ACCOUNT_NAME": "[reference('Microsoft.Resources/deployments/create-storage-account').outputs.storageAccountName.value]",
-              "DEFAULT_STORAGE_ACCESS_KEY": "[parameters('storageAccountKey')]",
+              "DEFAULT_STORAGE_ACCESS_KEY": "[reference('Microsoft.Resources/deployments/create-storage-account').outputs.storageAccountKey.value]",
               "ADMIN_USER_NAME": "[parameters('adminUsername')]",
               "ENVIRONMENT": "[parameters('environment')]",
               "SERVICE_HOST_BASE": "[variables('environment').serviceHostBase]",

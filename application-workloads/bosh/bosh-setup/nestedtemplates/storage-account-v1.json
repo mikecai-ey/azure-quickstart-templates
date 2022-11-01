@@ -26,6 +26,10 @@
       "type": "string",
       "value": "[variables('storageAccountName')]"
     },
+    "storageAccountKey": {
+      "type": "string",
+      "value": "[listKeys(variables('storageAccountId'), '2021-08-01').keys[0].value]"
+    },
     "blobEndpoint": {
       "type": "string",
       "value": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName')), '2021-02-01').primaryEndpoints.blob]"
