@@ -222,6 +222,8 @@ chmod 777 $home_dir/connect_director_vm.sh
 system_domain=$(get_setting SYSTEM_DOMAIN)
 if [ "${system_domain}" = "NotConfigured" ]; then
   system_domain="$(get_setting CLOUD_FOUNDRY_PUBLIC_IP).xip.io"
+else
+  system_domain="$(get_setting CLOUD_FOUNDRY_PUBLIC_IP).$system_domain"
 fi
 cat > "$home_dir/deploy_cloud_foundry.sh" << EOF
 #!/usr/bin/env bash
