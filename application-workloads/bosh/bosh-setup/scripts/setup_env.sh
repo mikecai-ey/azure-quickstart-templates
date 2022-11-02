@@ -245,19 +245,25 @@ EOF
 
 if [ "$environment" = "AzureChinaCloud" ]; then
   cat >> "$home_dir/deploy_cloud_foundry.sh" << EOF
+cd /tmp && wget https://bosh.io/d/github.com/cloudfoundry/bosh-dns-release?v=1.10.0
+cd ~
 bosh -n update-runtime-config ~/example_manifests/dns.yml \\
   -o ~/example_manifests/use-mirror-bosh-dns-release.yml \\
   --name=dns
 EOF
 else
   cat >> "$home_dir/deploy_cloud_foundry.sh" << EOF
+cd /tmp && wget https://bosh.io/d/github.com/cloudfoundry/bosh-dns-release?v=1.10.0
+cd ~
 bosh -n update-runtime-config ~/example_manifests/dns.yml \\
   --name=dns
 EOF
 fi
 
 cat >> "$home_dir/deploy_cloud_foundry.sh" << EOF
-bosh upload-stemcell --sha1=$(get_setting STEMCELL_SHA1) $(get_setting STEMCELL_URL)
+cd /tmp && wget $(get_setting STEMCELL_URL)
+cd ~
+bosh upload-stemcell --sha1=$(get_setting STEMCELL_SHA1) /tmp/$(echo $(get_setting STEMCELL_URL) | rev | cut -d '/' -f 1 | rev)
 
 bosh -n -d cf deploy ~/example_manifests/cf-deployment.yml \\
   --vars-store=~/cf-deployment-vars.yml \\
